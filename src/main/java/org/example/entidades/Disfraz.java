@@ -1,9 +1,27 @@
 package org.example.entidades;
 
-public class Disfraz {
+import jakarta.persistence.*;
 
+@Entity
+@Table (name = "Disfraz")
+public class Disfraz {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    int id;
+    @Column (name = "CHARACTER",unique = true)
     String character;
+    @Column (name = "PRICE")
     double price;
+
+    public Disfraz(int id, String character, double price) {
+        this.id = id;
+        this.character = character;
+        this.price = price;
+    }
+
+    public Disfraz(){
+
+    }
 
     public String getCharacter() {
         return character;

@@ -1,9 +1,35 @@
 package org.example.entidades;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Animador")
+
 public class Animador {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    @Column(name = "DNI", unique = true)
     String dni;
+
+    @Column(name = "NAME")
     String name;
+
+    @Column(name = "SURNAME")
     String surname;
+
+    public Animador(int id, String dni, String name, String surname) {
+        this.id = id;
+        this.dni = dni;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Animador(){
+
+    }
 
     public String getDni() {
         return dni;

@@ -1,9 +1,20 @@
 package org.example.entidades;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table (name = "Empresa")
 public class Empresa extends Cliente{
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    int id;
+    @Column (name = "CIF",unique = true)
     String cif;
+    @Column (name = "CONTACT")
     String contact;
+    @Column (name = "NAME")
     String name;
 
     public String getCif() {

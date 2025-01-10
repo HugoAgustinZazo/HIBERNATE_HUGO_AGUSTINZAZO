@@ -1,11 +1,32 @@
 package org.example.entidades;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table (name = "PARTICULAR")
 public class Particular extends Cliente{
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    int id;
+
+    @Column (name = "DNI",unique = true)
     String dni;
+    @Column (name = "NAME")
     String name;
+    @Column (name = "SURNAME")
     String surname;
 
+    public Particular(int id, String dni, String name, String surname) {
+        this.id = id;
+        this.dni = dni;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Particular(){
+
+    }
 
     public String getDni() {
         return dni;

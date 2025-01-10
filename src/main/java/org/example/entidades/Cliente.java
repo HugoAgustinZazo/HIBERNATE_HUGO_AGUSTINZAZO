@@ -1,5 +1,6 @@
 package org.example.entidades;
 
+
 public abstract class Cliente {
     String city;
     String street;

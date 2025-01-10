@@ -1,10 +1,40 @@
 package org.example.entidades;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table (name = "Presentador")
+
 public  class Presentador {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    @Column (name = "presentador_dni", nullable = false, length = 9,unique = true)
     String dni;
+
+    @Column (name = "presentador_name", length = 20)
     String name;
+
+    @Column (name = "presentador_surname", length = 30)
     String surname;
+
+    @Column (name = "presentador_year")
     int year;
+
+
+    public Presentador(int id, String dni, String name, String surname, int year) {
+        this.id = id;
+        this.dni = dni;
+        this.name = name;
+        this.surname = surname;
+        this.year = year;
+    }
+
+    public Presentador(){
+
+    }
 
     public String getDni() {
         return dni;

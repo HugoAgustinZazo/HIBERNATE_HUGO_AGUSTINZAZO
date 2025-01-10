@@ -1,12 +1,35 @@
 package org.example.entidades;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+
+@Entity
+@Table (name = "EVENTO")
 public class Evento {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    int id;
+    @Column (name = "NAME",unique = true)
     String name;
+    @Column (name = "TIME")
     LocalDateTime time;
+    @Column (name = "DESCRIPTION")
     String description;
+    @Column (name = "PRICE")
     double price;
+
+    public Evento(int id, String name, LocalDateTime time, String description, double price) {
+        this.id = id;
+        this.name = name;
+        this.time = time;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Evento() {
+    }
 
     public String getName() {
         return name;
