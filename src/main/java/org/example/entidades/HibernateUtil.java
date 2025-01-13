@@ -41,21 +41,14 @@ public class HibernateUtil {
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 
         //Especificamos qué clases/entidades va a mapear
-        /*
-        configuration.addAnnotatedClass(Employee.class);
-        configuration.addAnnotatedClass(Manager.class);
-        configuration.addAnnotatedClass(Developer.class);
-        configuration.addAnnotatedClass(Departament.class);
-        configuration.addAnnotatedClass(ITDepartment.class);
-        configuration.addAnnotatedClass(FinanceDepartment.class);
-        configuration.addAnnotatedClass(HRDepartment.class);
-        configuration.addAnnotatedClass(ProfessionalData.class);
-        configuration.addAnnotatedClass(Headquarter.class);
-        configuration.addAnnotatedClass(Project.class);
-        configuration.addAnnotatedClass(ProjectAsignee.class);
-        configuration.addAnnotatedClass(ResearchProject.class);
-        configuration.addAnnotatedClass(ExternalProject.class);
-*/
+
+        configuration.addAnnotatedClass(Animador.class);
+        configuration.addAnnotatedClass(Cliente.class);
+        configuration.addAnnotatedClass(Disfraz.class);
+        configuration.addAnnotatedClass(Empresa.class);
+        configuration.addAnnotatedClass(Evento.class);
+        configuration.addAnnotatedClass(Particular.class);
+        configuration.addAnnotatedClass(Presentador.class);
         return configuration.buildSessionFactory();
 
     }
