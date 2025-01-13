@@ -3,6 +3,7 @@ package org.example.entidades;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @Table (name = "PARTICULAR")
 public class Particular extends Cliente{
 
@@ -12,9 +13,9 @@ public class Particular extends Cliente{
 
     @Column (name = "DNI",unique = true)
     String dni;
-    @Column (name = "NAME")
+    @Column (name = "NOMBRE")
     String name;
-    @Column (name = "SURNAME")
+    @Column (name = "APELLIDO")
     String surname;
 
     public Particular(int id, String dni, String name, String surname) {
@@ -25,7 +26,6 @@ public class Particular extends Cliente{
     }
 
     public Particular(){
-
     }
 
     public String getDni() {

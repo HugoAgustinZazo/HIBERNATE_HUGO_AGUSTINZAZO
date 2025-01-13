@@ -3,14 +3,15 @@ package org.example.entidades;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @Table (name = "Disfraz")
 public class Disfraz {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     int id;
-    @Column (name = "CHARACTER",unique = true)
+    @Column (name = "PERSONAJE",unique = true)
     String character;
-    @Column (name = "PRICE")
+    @Column (name = "PRECIO")
     double price;
 
     public Disfraz(int id, String character, double price) {

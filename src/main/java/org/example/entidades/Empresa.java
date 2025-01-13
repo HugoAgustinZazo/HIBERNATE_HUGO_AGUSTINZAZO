@@ -4,6 +4,7 @@ package org.example.entidades;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @Table (name = "Empresa")
 public class Empresa extends Cliente{
 
@@ -12,9 +13,9 @@ public class Empresa extends Cliente{
     int id;
     @Column (name = "CIF",unique = true)
     String cif;
-    @Column (name = "CONTACT")
+    @Column (name = "CONTACTO")
     String contact;
-    @Column (name = "NAME")
+    @Column (name = "NOMBRE")
     String name;
 
     public String getCif() {

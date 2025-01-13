@@ -6,18 +6,19 @@ import java.time.LocalDateTime;
 
 
 @Entity
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @Table (name = "EVENTO")
 public class Evento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     int id;
-    @Column (name = "NAME",unique = true)
+    @Column (name = "NOMBRE",unique = true)
     String name;
-    @Column (name = "TIME")
+    @Column (name = "HORARIO")
     LocalDateTime time;
-    @Column (name = "DESCRIPTION")
+    @Column (name = "DESCRIPCION")
     String description;
-    @Column (name = "PRICE")
+    @Column (name = "PRECIO")
     double price;
 
     public Evento(int id, String name, LocalDateTime time, String description, double price) {

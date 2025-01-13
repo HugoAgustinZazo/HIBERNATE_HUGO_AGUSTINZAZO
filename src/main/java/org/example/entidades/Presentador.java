@@ -4,6 +4,7 @@ package org.example.entidades;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 @Table (name = "Presentador")
 
 public  class Presentador {
@@ -11,16 +12,16 @@ public  class Presentador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column (name = "presentador_dni", nullable = false, length = 9,unique = true)
+    @Column (name = "DNI", nullable = false, length = 9,unique = true)
     String dni;
 
-    @Column (name = "presentador_name", length = 20)
+    @Column (name = "NOMBRE", length = 20)
     String name;
 
-    @Column (name = "presentador_surname", length = 30)
+    @Column (name = "SURNAME", length = 30)
     String surname;
 
-    @Column (name = "presentador_year")
+    @Column (name = "AÑO")
     int year;
 
 
