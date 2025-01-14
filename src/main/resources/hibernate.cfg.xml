@@ -1,0 +1,32 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de conexión a la base de datos -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/practica_ad_ut3</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+
+        <!-- Dialecto de Hibernate -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Configuración adicional -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Clases anotadas -->
+        <mapping class="org.example.entidades.Animador"/>
+        <mapping class="org.example.entidades.Cliente"/>
+        <mapping class="org.example.entidades.Contrata"/>
+        <mapping class="org.example.entidades.Disfraz"/>
+        <mapping class="org.example.entidades.Empresa"/>
+        <mapping class="org.example.entidades.Evento"/>
+        <mapping class="org.example.entidades.Particular"/>
+        <mapping class="org.example.entidades.Presentador"/>
+
+    </session-factory>
+</hibernate-configuration>

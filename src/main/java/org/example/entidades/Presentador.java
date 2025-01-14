@@ -3,16 +3,16 @@ package org.example.entidades;
 
 import jakarta.persistence.*;
 
-@Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
-@Table (name = "Presentador")
+import java.util.List;
 
+@Entity
+@Table (name = "Presentador")
 public  class Presentador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column (name = "DNI", nullable = false, length = 9,unique = true)
+    @Column (name = "DNI",unique = true)
     String dni;
 
     @Column (name = "NOMBRE", length = 20)
@@ -23,6 +23,9 @@ public  class Presentador {
 
     @Column (name = "AÑO")
     int year;
+
+    @OneToMany(mappedBy = "presentador")
+    private List<Evento> eventos;
 
 
     public Presentador(int id, String dni, String name, String surname, int year) {

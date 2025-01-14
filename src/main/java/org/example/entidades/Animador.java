@@ -2,10 +2,10 @@ package org.example.entidades;
 
 import jakarta.persistence.*;
 
-@Entity
-@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "Animador")
+import java.util.List;
 
+@Entity
+@Table(name = "Animador")
 public class Animador {
 
     @Id
@@ -21,11 +21,45 @@ public class Animador {
     @Column(name = "APELLIDO")
     String surname;
 
-    public Animador(int id, String dni, String name, String surname) {
+    @ManyToOne
+    @JoinColumn(name = "DISFRAZ")
+    private Disfraz disfraz;
+
+    @ManyToMany(mappedBy = "animadores")
+    private List<Evento>eventos;
+
+    public Animador(int id, String dni, String name, String surname, Disfraz disfraz_id, List<Evento> eventos) {
         this.id = id;
         this.dni = dni;
         this.name = name;
         this.surname = surname;
+
+        this.disfraz = disfraz_id;
+        this.eventos = eventos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Disfraz getDisfraz() {
+        return disfraz;
+    }
+
+    public void setDisfraz(Disfraz disfraz) {
+        this.disfraz = disfraz;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     public Animador(){

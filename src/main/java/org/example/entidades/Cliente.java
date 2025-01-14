@@ -3,11 +3,13 @@ package org.example.entidades;
 
 import jakarta.persistence.*;
 
-@Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
-@Table (name = "CLIENTE")
-public class Cliente {
+import java.util.List;
 
+@Entity
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TIPO_CLIENTE",discriminatorType = DiscriminatorType.STRING)
+@Table (name = "CLIENTE")
+public abstract class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -20,16 +22,20 @@ public class Cliente {
     @Column(name = "TELEFONO")
     String phone_number;
 
+    @OneToMany(mappedBy = "cliente_id")
+    private List<Contrata> contratas;
+
     public Cliente() {
     }
 
-    public Cliente(int id, String city, String street, String village, String phone_number) {
-        this.id = id;
+    public Cliente(String city, String street, String village, String phone_number) {
         this.city = city;
         this.street = street;
         this.village = village;
         this.phone_number = phone_number;
     }
+
+    public abstract void info();
 
     public int getId() {
         return id;
@@ -70,5 +76,6 @@ public class Cliente {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
+
 
 }

@@ -24,7 +24,7 @@ public class HibernateUtil {
         //Driver específico para la BD de destino
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
         //Datos para la conexión hacia la BD (cadena de conexión y credenciales)
-        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/empresa");
+        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/practica_ad_ut3");
         configuration.setProperty("hibernate.connection.username", "root");
         configuration.setProperty("hibernate.connection.password", "");
 
@@ -49,6 +49,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Evento.class);
         configuration.addAnnotatedClass(Particular.class);
         configuration.addAnnotatedClass(Presentador.class);
+        configuration.addAnnotatedClass(Contrata.class);
         return configuration.buildSessionFactory();
 
     }

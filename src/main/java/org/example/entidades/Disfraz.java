@@ -2,26 +2,49 @@ package org.example.entidades;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @Table (name = "Disfraz")
 public class Disfraz {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "DISFRAZ_ID")
     int id;
     @Column (name = "PERSONAJE",unique = true)
     String character;
     @Column (name = "PRECIO")
     double price;
 
-    public Disfraz(int id, String character, double price) {
+    @OneToMany(mappedBy = "disfraz", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<Animador> animadores;
+
+
+    public Disfraz(int id, String character, double price, List<Animador> animadores) {
         this.id = id;
         this.character = character;
         this.price = price;
+        this.animadores = animadores;
     }
 
     public Disfraz(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Animador> getAnimadores() {
+        return animadores;
+    }
+
+    public void setAnimadores(List<Animador> animadores) {
+        this.animadores = animadores;
     }
 
     public String getCharacter() {
