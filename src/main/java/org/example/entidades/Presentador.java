@@ -28,8 +28,7 @@ public  class Presentador {
     private List<Evento> eventos;
 
 
-    public Presentador(int id, String dni, String name, String surname, int year) {
-        this.id = id;
+    public Presentador(String dni, String name, String surname, int year) {
         this.dni = dni;
         this.name = name;
         this.surname = surname;

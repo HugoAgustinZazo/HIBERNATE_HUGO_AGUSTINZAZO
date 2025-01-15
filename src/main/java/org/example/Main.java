@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.dao.ClienteDao;
 import org.example.entidades.*;
 import org.hibernate.*;
 public class Main {
@@ -19,7 +20,7 @@ public class Main {
 //        particular.setName("Pedro");*-+
 //        particular.setSurname("Pérez");
 //        session.save(particular);
-
+/*
         Cliente nuevoParticular = new Empresa("Barcelona", "12345678A",
                 "Calle Principal", "Barcelona", "98765432B", "Pedro", "Pérez");
 
@@ -66,5 +67,10 @@ public class Main {
         session.getTransaction().commit();
         session.close();
 
+
+ */
+        ClienteDao cd = new ClienteDao();
+
+        System.out.println(cd.getCompanyById(2));
     }
 }

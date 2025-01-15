@@ -18,7 +18,7 @@ public class Contrata {
     @JoinColumn(name = "evento_id")
     private Evento evento_id;
 
-    @Column
+    @Column(name = "Ciudad_evento")
     String ciudadEvento;
 
 

@@ -17,6 +17,10 @@
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- Desactivar caché de segundo nivel -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <!-- Desactivar el pool de conexiones integrado -->
+        <property name="hibernate.c3p0.min_size">0</property>
 
         <!-- Clases anotadas -->
         <mapping class="org.example.entidades.Animador"/>

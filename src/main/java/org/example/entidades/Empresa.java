@@ -52,7 +52,7 @@ public class Empresa extends Cliente{
 
     @Override
     public String toString() {
-        return "CIF: "+cif+" Contact "+contact+" Name "+name+" {City "+city+" Street "+street+" Village "+village+" Phone Number"+phone_number+"}";
+        return "=============Empresa=============\nCIF: "+cif+"\nContact: "+contact+"\nName: "+name+"\nCity: "+city+"\nStreet: "+street+"\nVillage: "+village+"\nPhone Number: "+phone_number+"\n=================================";
     }
 
     @Override

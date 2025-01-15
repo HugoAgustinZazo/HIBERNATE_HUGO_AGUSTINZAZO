@@ -20,11 +20,9 @@ public class Disfraz {
     private List<Animador> animadores;
 
 
-    public Disfraz(int id, String character, double price, List<Animador> animadores) {
-        this.id = id;
+    public Disfraz( String character, double price) {
         this.character = character;
         this.price = price;
-        this.animadores = animadores;
     }
 
     public Disfraz(){
