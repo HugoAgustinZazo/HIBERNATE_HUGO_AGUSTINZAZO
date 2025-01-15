@@ -18,14 +18,14 @@ public  class Presentador {
     @Column (name = "NOMBRE", length = 20)
     String name;
 
-    @Column (name = "SURNAME", length = 30)
+    @Column (name = "APELLIDO", length = 30)
     String surname;
 
     @Column (name = "AÑO")
     int year;
 
-    @OneToMany(mappedBy = "presentador")
-    private List<Evento> eventos;
+    @OneToMany(mappedBy = "presentator",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Evento> events;
 
 
     public Presentador(String dni, String name, String surname, int year) {
@@ -73,11 +73,5 @@ public  class Presentador {
 
     @Override
     public String toString() {
-        return "Presentador{" +
-                "dni='" + dni + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", year=" + year +
-                '}';
-    }
+        return "=============Presentador=============\nDNI: "+dni+"\nName: "+name+"\nSurname: "+surname+"\nYear: "+year+"\n======================================";    }
 }

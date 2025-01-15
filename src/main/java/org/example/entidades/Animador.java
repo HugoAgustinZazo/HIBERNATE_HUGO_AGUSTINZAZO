@@ -12,7 +12,7 @@ public class Animador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column(name = "DNI", unique = true)
+    @Column(name = "DNI", unique = true,nullable = false)
     String dni;
 
     @Column(name = "NOMBRE")
@@ -21,21 +21,22 @@ public class Animador {
     @Column(name = "APELLIDO")
     String surname;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "DISFRAZ")
-    private Disfraz disfraz;
+    private Disfraz costume;
 
-    @ManyToMany(mappedBy = "animadores")
-    private List<Evento>eventos;
+    @ManyToMany(mappedBy = "entertainers")
+    private List<Evento>events;
 
-    public Animador(int id, String dni, String name, String surname, Disfraz disfraz_id, List<Evento> eventos) {
-        this.id = id;
+    public Animador() {
+    }
+
+    public Animador(String dni, String name, String surname, Disfraz costume_id) {
         this.dni = dni;
         this.name = name;
         this.surname = surname;
+        this.costume = costume_id;
 
-        this.disfraz = disfraz_id;
-        this.eventos = eventos;
     }
 
     public int getId() {
@@ -44,26 +45,6 @@ public class Animador {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Disfraz getDisfraz() {
-        return disfraz;
-    }
-
-    public void setDisfraz(Disfraz disfraz) {
-        this.disfraz = disfraz;
-    }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
-
-    public Animador(){
-
     }
 
     public String getDni() {
@@ -90,12 +71,24 @@ public class Animador {
         this.surname = surname;
     }
 
+    public Disfraz getCostume() {
+        return costume;
+    }
+
+    public void setCostume(Disfraz costume) {
+        this.costume = costume;
+    }
+
+    public List<Evento> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Evento> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
-        return "Animador{" +
-                "dni='" + dni + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return "=============Animador=============\nDNI: "+dni+"\nName: "+name+"\nSurname: "+surname+"\n==================================";
     }
 }

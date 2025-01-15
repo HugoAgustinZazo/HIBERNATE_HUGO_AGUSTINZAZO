@@ -56,6 +56,6 @@ public class Particular extends Cliente{
 
     @Override
     public String toString() {
-        return "DNI: "+dni+" Name "+name+" Surname "+surname+" {City "+city+" Street "+street+" Village "+village+" Phone Number"+phone_number+"}";
+        return "=============Particular=============\nDNI: "+dni+"\nName: "+name+"\nSurname: "+surname+"\nCity: "+city+"\nStreet: "+street+"\nVillage: "+village+"\nPhone Number: "+phone_number+"\n====================================";
     }
 }

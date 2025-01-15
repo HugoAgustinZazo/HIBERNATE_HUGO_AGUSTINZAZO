@@ -21,7 +21,7 @@ public class Evento {
     @Column (name = "PRECIO")
     double price;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "animador_evento",
             joinColumns = {
@@ -29,22 +29,31 @@ public class Evento {
             inverseJoinColumns = {
                     @JoinColumn(name = "Animador_id")
             })
-    private List<Animador> animadores;
+    private List<Animador> entertainers;
 
 
-    @OneToMany(mappedBy = "evento_id")
+    @OneToMany(mappedBy = "event_id",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Contrata> contratos;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "presentador")
-    private Presentador presentador;
+    private Presentador presentator;
 
-    public Evento(int id, String name, String time, String description, double price) {
+    public Evento(String name, String time, String description, double price,Presentador presentator) {
+        this.name = name;
+        this.time = time;
+        this.description = description;
+        this.price = price;
+        this.presentator = presentator;
+    }
+
+    public Evento(int id, String name, String time, String description, double price, List<Animador> entertainers) {
         this.id = id;
         this.name = name;
         this.time = time;
         this.description = description;
         this.price = price;
+        this.entertainers = entertainers;
     }
 
     public Evento() {
@@ -58,12 +67,20 @@ public class Evento {
         this.id = id;
     }
 
-    public List<Animador> getAnimadores() {
-        return animadores;
+    public List<Animador> getEntertainers() {
+        return entertainers;
     }
 
-    public void setAnimadores(List<Animador> animadores) {
-        this.animadores = animadores;
+    public void setEntertainers(List<Animador> entertainers) {
+        this.entertainers = entertainers;
+    }
+
+    public Presentador getPresentator() {
+        return presentator;
+    }
+
+    public void setPresentator(Presentador presentator) {
+        this.presentator = presentator;
     }
 
     public List<Contrata> getContratos() {
@@ -75,11 +92,11 @@ public class Evento {
     }
 
     public Presentador getPresentador() {
-        return presentador;
+        return presentator;
     }
 
     public void setPresentador(Presentador presentador) {
-        this.presentador = presentador;
+        this.presentator = presentador;
     }
 
     public String getName() {
@@ -116,11 +133,6 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "Evento{" +
-                "name='" + name + '\'' +
-                ", time=" + time +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
+        return "=============Evento=============\nName: "+name+"\nTime: "+time+"\nDescription: "+description+"\nPrice: "+price+"\n"+presentator+"\n================================";
     }
 }

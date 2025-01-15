@@ -16,8 +16,8 @@ public class Disfraz {
     @Column (name = "PRECIO")
     double price;
 
-    @OneToMany(mappedBy = "disfraz", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
-    private List<Animador> animadores;
+    @OneToMany(mappedBy = "costume", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Animador> entertainers;
 
 
     public Disfraz( String character, double price) {
@@ -38,11 +38,11 @@ public class Disfraz {
     }
 
     public List<Animador> getAnimadores() {
-        return animadores;
+        return entertainers;
     }
 
     public void setAnimadores(List<Animador> animadores) {
-        this.animadores = animadores;
+        this.entertainers = animadores;
     }
 
     public String getCharacter() {
@@ -63,10 +63,7 @@ public class Disfraz {
 
     @Override
     public String toString() {
-        return "Disfraz{" +
-                "character='" + character + '\'' +
-                ", price=" + price +
-                '}';
+        return "=============Disfraz=============\nCharacter: "+character+"\nPrice: "+price+"\n=================================";
     }
 
 }

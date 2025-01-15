@@ -10,63 +10,68 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class ClienteDao {
 
-    public void insertarCliente (){
+    public void insertClient () {
         Scanner teclado = new Scanner(System.in);
         System.out.println("============Insertar Cliente============");
         System.out.println("1-Insertar una Empresa.");
         System.out.println("2-Insertar un Particular.");
-        int opcion = teclado.nextInt();
-        teclado.nextLine();
+        try {
+            int opcion = teclado.nextInt();
+            teclado.nextLine();
 
-        System.out.println("Ciudad");
-        String ciudad = teclado.nextLine();
-        System.out.println("Calle");
-        String calle = teclado.nextLine();
-        System.out.println("Municipio");
-        String municipio = teclado.nextLine();
-        System.out.println("Telefono");
-        String telefono = teclado.nextLine();
-        if(opcion==1){
-            System.out.println("============Datos especificos de la empresa============");
-            System.out.println("CIF");
-            String cif = teclado.nextLine();
-            System.out.println("Contacto");
-            String contacto = teclado.nextLine();
-            System.out.println("Nombre");
-            String nombre = teclado.nextLine();
-            Cliente cliente = new Empresa(ciudad,calle,municipio,telefono,cif,contacto,nombre);
+            System.out.println("Ciudad");
+            String ciudad = teclado.nextLine();
+            System.out.println("Calle");
+            String calle = teclado.nextLine();
+            System.out.println("Municipio");
+            String municipio = teclado.nextLine();
+            System.out.println("Telefono");
+            String telefono = teclado.nextLine();
+            if (opcion == 1) {
+                System.out.println("============Datos especificos de la empresa============");
+                System.out.println("CIF");
+                String cif = teclado.nextLine();
+                System.out.println("Contacto");
+                String contacto = teclado.nextLine();
+                System.out.println("Nombre");
+                String nombre = teclado.nextLine();
+                Cliente client = new Empresa(ciudad, calle, municipio, telefono, cif, contacto, nombre);
 
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                Transaction tx = session.beginTransaction();
-                session.save(cliente);
-                tx.commit();
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    Transaction tx = session.beginTransaction();
+                    session.save(client);
+                    tx.commit();
+                }
+                System.out.println("Empresa insertada");
+
+            } else if (opcion == 2) {
+                System.out.println("============Datos especificos del Particular============");
+                System.out.println("DNI");
+                String dni = teclado.nextLine();
+                System.out.println("Nombre");
+                String nombreParticular = teclado.nextLine();
+                System.out.println("Apellido");
+                String apellido = teclado.nextLine();
+                Cliente clientParticular = new Particular(ciudad, calle, municipio, telefono, dni, nombreParticular, apellido);
+
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    Transaction tx = session.beginTransaction();
+                    session.save(clientParticular);
+                    tx.commit();
+                }
+                System.out.println("Particular insertado");
+            } else {
+
+                System.out.println("Opcion no valida");
             }
-            System.out.println("Empresa insertada");
-
-        }else if(opcion==2){
-            System.out.println("============Datos especificos del Particular============");
-            System.out.println("DNI");
-            String dni = teclado.nextLine();
-            System.out.println("Nombre");
-            String nombreParticular = teclado.nextLine();
-            System.out.println("Apellido");
-            String apellido = teclado.nextLine();
-            Cliente clienteParticular = new Particular(ciudad,calle,municipio,telefono,dni,nombreParticular,apellido);
-
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                Transaction tx = session.beginTransaction();
-                session.save(clienteParticular);
-                tx.commit();
-            }
-            System.out.println("Particular insertado");
-        }else{
-
-            System.out.println("Opcion no valida");
+        }catch (InputMismatchException e){
+            System.err.println("Tipo de dato no valido\n");
         }
     }
 
@@ -84,38 +89,62 @@ public class ClienteDao {
         }
     }
 
-    public List<Particular> getAllParticulars() {
+    public Cliente getClientById(int clientId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-             Query<Particular> query = session.createQuery("from CLIENTE where TIPO_CLIENTE = :Particular", Particular.class);
-             query.setParameter("Particular","Particular");
-             List <Particular> particulares = query.getResultList();
-             return particulares;
+            Cliente client = session.find(Cliente.class, clientId);
+            return client;
         }
     }
 
+    public List<Particular> getAllParticulars() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+             Query<Particular> query = session.createQuery("from Cliente where TIPO_CLIENTE = :Particular", Particular.class);
+             query.setParameter("Particular","Particular");
+             List <Particular> particulars = query.getResultList();
+             return particulars;
+        }
+    }
+    public Cliente getParticularByDni(String dni) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Particular> query = session.createQuery(
+                    "from Particular p where p.dni = :dni", Particular.class);
+            query.setParameter("dni", dni);
+            Particular particular = query.uniqueResult();
+            return particular;
+        }
+    }
+
+    public Cliente getCompanyByCif(String cif) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Empresa> query = session.createQuery(
+                    "from Empresa where cif = :cif", Empresa.class);
+            query.setParameter("cif", cif);
+            Cliente empresa = query.uniqueResult();
+            return empresa;
+        }
+    }
     public List<Empresa> getAllCompanies() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Empresa> query = session.createQuery("from CLIENTE where TIPO_CLIENTE = :Empresa", Empresa.class);
+            Query<Empresa> query = session.createQuery("from Cliente where TIPO_CLIENTE = :Empresa", Empresa.class);
             query.setParameter("Empresa","Empresa");
-            List<Empresa>empresas = query.getResultList();
-            return empresas;
+            List<Empresa>companies = query.getResultList();
+            return companies;
         }
     }
 
     public List<Cliente> getAllClients() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             List <Cliente> clients = new ArrayList<>();
-            clients.addAll(session.createQuery("from CLIENTE", Cliente.class).getResultList());
+            clients.addAll(session.createQuery("from Cliente", Cliente.class).getResultList());
             return clients;
         }
     }
 
-    public List<Client> getClientsByEventCity(String cityName) {
+    public List<Cliente> getClientsByEventCity(String cityName) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Client> query = session.createQuery("select distinct cce.cliente_id from Cliente_contrata_Evento cce where cce.Ciudad_evento = :city", Client.class);
-            query.setParameter("city", cityName);
-            List<Client> clients = query.getResultList();
+            List<Cliente> clients = session.createQuery("select distinct h.client_id from Contrata h where h.eventcity = :city", Cliente.class).setParameter("city",cityName).getResultList();
             return clients;
         }
+
     }
 }

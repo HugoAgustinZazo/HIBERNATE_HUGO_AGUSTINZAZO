@@ -7,6 +7,11 @@ import java.util.List;
 
 @Entity
 @Inheritance (strategy = InheritanceType.SINGLE_TABLE)
+/**He elegido la herencia "Single Table ya que creo que a la hora de buscar registros/informacion se hace más sencillo ir a buscar a una sola
+ * tabla, al igual que si quieres ver todos los clientes sin importar el tipo puedes verlos solo en esa tabla y asi los tienes todos juntos
+ * aunque también separados a la vez por la columna discriminatoria, aparte del menor consumo de memoria ya que en vez de mapear dos tablas solo mapea una.
+ *
+ */
 @DiscriminatorColumn(name = "TIPO_CLIENTE",discriminatorType = DiscriminatorType.STRING)
 @Table (name = "CLIENTE")
 public abstract class Cliente {
@@ -22,8 +27,8 @@ public abstract class Cliente {
     @Column(name = "TELEFONO")
     String phone_number;
 
-    @OneToMany(mappedBy = "cliente_id")
-    private List<Contrata> contratas;
+    @OneToMany(mappedBy = "client_id",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Contrata> hires;
 
     public Cliente() {
     }
@@ -36,6 +41,7 @@ public abstract class Cliente {
     }
 
     public abstract void info();
+
 
     public int getId() {
         return id;

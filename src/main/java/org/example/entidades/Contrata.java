@@ -12,56 +12,51 @@ public class Contrata {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente_id;
+    private Cliente client_id;
 
     @ManyToOne
     @JoinColumn(name = "evento_id")
-    private Evento evento_id;
+    private Evento event_id;
 
     @Column(name = "Ciudad_evento")
-    String ciudadEvento;
+    String eventcity;
 
 
-    public Contrata(int id,Cliente cliente_id, Evento evento_id, String ciudadEvento) {
-        this.id = id;
-        this.cliente_id = cliente_id;
-        this.evento_id = evento_id;
-        this.ciudadEvento = ciudadEvento;
+    public Contrata(Cliente client_id, Evento event_id, String eventcity) {
+        this.client_id = client_id;
+        this.event_id = event_id;
+        this.eventcity = eventcity;
     }
 
     public Contrata() {
     }
 
     public Cliente getCliente_id() {
-        return cliente_id;
+        return client_id;
     }
 
     public void setCliente_id(Cliente cliente_id) {
-        this.cliente_id = cliente_id;
+        this.client_id = cliente_id;
     }
 
     public Evento getEvento_id() {
-        return evento_id;
+        return event_id;
     }
 
     public void setEvento_id(Evento evento_id) {
-        this.evento_id = evento_id;
+        this.event_id = evento_id;
     }
 
     public String getCiudadEvento() {
-        return ciudadEvento;
+        return eventcity;
     }
 
     public void setCiudadEvento(String ciudadEvento) {
-        this.ciudadEvento = ciudadEvento;
+        this.eventcity = ciudadEvento;
     }
 
     @Override
     public String toString() {
-        return "Contrata{" +
-                "cliente_id=" + cliente_id +
-                ", evento_id=" + evento_id +
-                ", ciudadEvento='" + ciudadEvento + '\'' +
-                '}';
+        return "=============Contrata=============\n"+client_id+"\n"+event_id+"\nEvent city: "+eventcity+"\n==================================";
     }
 }

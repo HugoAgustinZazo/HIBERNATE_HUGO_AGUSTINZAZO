@@ -13,7 +13,7 @@ public class Empresa extends Cliente{
     String cif;
     @Column (name = "CONTACTO")
     String contact;
-    @Column (name = "NOMBRE")
+    @Column (name = "NOMBRE_EMPRESA")
     String name;
 
     public Empresa (){
